@@ -1,29 +1,28 @@
 let DICTIONARY = {
 	"function" : {
-		print : function (el) {
-			let type = "%";
+		print : function (type, val) {
+			let typeSymbol = "%";
 
-			if (el.type === "char") type += "c";
-			else if (el.type === "string") type += "s";
-			else if (el.type === "integer") {
-				if (el.subtype === "infinity") {
-					console.error("Too big number!");
-					return;
-				}
-				else {
-					type += "d";
-				}
-			}
-			else if (el.type === "float") type += "f";
-			else if (el.type === "undefined") type += "s";
+			if (type === "char") typeSymbol += "c";
+			else if (type === "string") typeSymbol += "s";
+			else if (type === "int") typeSymbol += "d";
+			else if (type === "float") typeSymbol += "f";
+			else if (type === "undefined") typeSymbol += "s";
 			else {
-				console.error("UNKNOWN_TYPE");
+				console.error("UNKNOWN_TYPE : " + el.type);
 				return;
 			}
 
-			return `printf(${type}, ${el.value});\n`;
+			return `printf(${typeSymbol}, ${val});\n`;
 		}
-	}
+	},
+
+	"types" : [
+		"int",
+		"float",
+		"string",
+		"char"
+	]
 };
 
 module.exports.DICTIONARY = DICTIONARY;
