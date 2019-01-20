@@ -7,7 +7,7 @@ let LEXER = function (content, dictionary) {
 	for (let i = 0; i < strings.length; i++) {
 		let currentString = strings[i].trim();
 
-		if (currentString !== "") {
+		if (currentString !== "" && currentString[0] !== "#") {
 			let parts = currentString.split(":");
 
 			let command = parts[0].trim();
