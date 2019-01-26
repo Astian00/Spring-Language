@@ -16,7 +16,7 @@ let Type = function (variable) {
 		}
 	}
 	else {
-		console.error("Incorrect type: " + typeof variable);
+		console.error("Incorrect type : " + typeof variable);
 		return;
 	}
 };

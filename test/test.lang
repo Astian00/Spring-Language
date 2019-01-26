@@ -1,4 +1,1 @@
-#PRINT : (string)100;
-#PRINT : (string)  3.14; #PI number;
-
-PRINT : (int) 1*5;
+PRINT : (float) 2.5*-1.5;

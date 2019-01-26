@@ -6,11 +6,11 @@ let DICTIONARY = {
 			let typeSymbol = "%";
 			let parsedValue = val;
 
-			if (typeof parsedValue === "string" && /\+|\-|\*|\/|\%/gm.test(parsedValue) && type !== "string") {
-				parsedValue = eval(val);
+			if (typeof parsedValue === "string" && type !== "string" && /^(\-?[0-9]*\.?[0-9]*(\+|\-|\*|\/|\%)?\-?[0-9]*\.?[0-9]*)*$/gm.test(parsedValue)) {
+				parsedValue = eval(parsedValue);
 
 				if (Type(parsedValue) !== type) {
-					console.error("Incorrect type: " + Type(parsedValue));
+					console.error("Incorrect type : " + typeof parsedValue);
 					return;
 				}
 			}
@@ -25,7 +25,7 @@ let DICTIONARY = {
 				return;
 			}
 
-			return `printf(${typeSymbol}, ${parsedValue});\n`;
+			return `printf(${typeSymbol},${parsedValue});\n`;
 		}
 	},
 
