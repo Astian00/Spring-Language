@@ -6,11 +6,11 @@ let DICTIONARY = {
 			let typeSymbol = "%";
 			let parsedValue = val;
 
-			if (typeof parsedValue === "string" && type !== "string" && /^(\-?[0-9]*\.?[0-9]*(\+|\-|\*|\/|\%)?\-?[0-9]*\.?[0-9]*)*$/gm.test(parsedValue)) {
+			if (type === "int" || type === "float") {
 				parsedValue = eval(parsedValue);
 
 				if (Type(parsedValue) !== type) {
-					console.error("Incorrect type : " + typeof parsedValue);
+					console.error("Type error : " + typeof parsedValue + " !== " + type);
 					return;
 				}
 			}
