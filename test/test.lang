@@ -1,1 +1,1 @@
-PRINT : (float) 2+0.5;
+PRINT : (string) "hello";

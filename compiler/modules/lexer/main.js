@@ -31,15 +31,18 @@ let LEXER = function (content, dictionary) {
 					}
 					else {
 						console.error(`Unknown type : "${type}"`);
+						return;
 					}
 				}
 				else {
 					// undefined_function
 					console.error(`Unknown function : "${command}"`);
+					return;
 				}
 			}
 			else {
 				console.error("You need to set type of your value!");
+				return;
 			}
 
 			lexems.push(obj);

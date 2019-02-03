@@ -1,18 +1,15 @@
 let Type = require("./utils/type.js").TYPE;
+let Eval = require("./utils/eval.js").EVAL;
 
 let DICTIONARY = {
 	"function" : {
 		print : function (type, val) {
 			let typeSymbol = "%";
-			let parsedValue = val;
+			let parsedValue = Eval(val);
 
-			if (type === "int" || type === "float") {
-				parsedValue = eval(parsedValue);
-
-				if (Type(parsedValue) !== type) {
-					console.error("Type error : " + typeof parsedValue + " !== " + type);
-					return;
-				}
+			if (Type(parsedValue) !== type) {
+				console.error("Type error : " + typeof parsedValue + " !== " + type);
+				return;
 			}
 
 			if (type === "char") typeSymbol += "c";
