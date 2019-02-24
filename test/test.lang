@@ -1,1 +1,5 @@
+VAR : (string) old = "Hello World";
+
+
+
 PRINT : (string) "hello";

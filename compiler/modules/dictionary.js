@@ -7,7 +7,7 @@ let DICTIONARY = {
 			let typeSymbol = "%";
 			let parsedValue = Eval(val);
 
-			if (Type(parsedValue) !== type) {
+			if (Type.convert(parsedValue) !== type) {
 				console.error("Type error : " + typeof parsedValue + " !== " + type);
 				return;
 			}
@@ -23,6 +23,43 @@ let DICTIONARY = {
 			}
 
 			return `printf(${typeSymbol},${parsedValue});\n`;
+		},
+
+		var : function (type, val) {
+
+			if (val.match(/\=/gm).length !== 1) {
+				console.error("Unknown syntax: " + val);
+				return;
+			}
+			else {
+				let varName = val.split("=")[0].trim();
+				let varValue = val.split("=")[1].trim();
+
+				if (Type.convert(varValue) !== type) {
+					console.error("Type error : " + typeof parsedValue + " !== " + type);
+					return;
+				}
+				else {
+					if (/[^a-zA-z0-9]/gm.test(varName)) {
+						console.error("There are unacceptable symbols in the variable name : " + varName);
+						return;	
+					}
+					else {
+						if (/[0-9]/gm.test(varName[0])) {
+							console.error("The first letter of the variable should not be a number : " + varName);
+							return;	
+						}
+						else {
+							if (Type.convert(varValue) === "string") {
+								return `char ${varName}[] = ${varValue};\n`;
+							}
+							else {
+								return `${type} ${varName}=${varValue};\n`;
+							}
+						}
+					}
+				}
+			}
 		}
 	},
 

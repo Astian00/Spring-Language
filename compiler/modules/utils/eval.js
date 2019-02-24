@@ -1,7 +1,7 @@
 let Type = require("./type.js").TYPE;
 
 let Eval = function (value) {
-	if (Type(value) === "int" || Type(value) === "float") {
+	if (Type.convert(value) === "int" || Type.convert(value) === "float") {
 		let evaled = eval(value);
 
 		if (typeof evaled === "number" && isFinite(evaled)) {
