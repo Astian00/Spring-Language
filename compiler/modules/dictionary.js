@@ -1,9 +1,16 @@
 let Type = require("./utils/type.js").TYPE;
 let Eval = require("./utils/eval.js").EVAL;
+let splitValue = require("./utils/splitValue.js").splitValue;
+let isEmpty = require("./utils/isEmpty.js").isEmpty;
 
 let DICTIONARY = {
 	"function" : {
-		print : function (type, val) {
+		print : function (fullValue) {
+			let obj = splitValue(fullValue, DICTIONARY["types"]);
+
+			let type = obj.type;
+			let val = obj.val;
+
 			let typeSymbol = "%";
 			let parsedValue = Eval(val);
 
@@ -22,10 +29,19 @@ let DICTIONARY = {
 				return;
 			}
 
-			return `printf(${typeSymbol},${parsedValue});\n`;
+			if (obj.varName && !isEmpty(obj.varName)) {
+				return `printf("${typeSymbol}", ${obj.varName});\n`;
+			}
+			else {
+				return `printf("${typeSymbol}",${parsedValue});\n`;
+			}
 		},
 
-		var : function (type, val) {
+		var : function (fullValue) {
+			let obj = splitValue(fullValue, DICTIONARY["types"]);
+
+			let type = obj.type;
+			let val = obj.val;
 
 			if (val.match(/\=/gm).length !== 1) {
 				console.error("Unknown syntax: " + val);
@@ -50,6 +66,12 @@ let DICTIONARY = {
 							return;	
 						}
 						else {
+							global.vars.push({
+								name : varName,
+								type : type,
+								value : varValue
+							});
+
 							if (Type.convert(varValue) === "string") {
 								return `char ${varName}[] = ${varValue};\n`;
 							}

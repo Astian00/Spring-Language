@@ -1,5 +1,4 @@
-VAR : (string) old = "Hello World";
+var : (int) old = 17;
 
-
-
-PRINT : (string) "hello";
+print : (string) "Variable old created!";
+print : old;
