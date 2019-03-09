@@ -1,7 +1,7 @@
 let Type = require("./utils/type.js").TYPE;
 let Eval = require("./utils/eval.js").EVAL;
-let splitValue = require("./utils/splitValue.js").splitValue;
 let isEmpty = require("./utils/isEmpty.js").isEmpty;
+let splitValue = require("./utils/splitValue.js").splitValue;
 
 let DICTIONARY = {
 	"function" : {
@@ -29,12 +29,7 @@ let DICTIONARY = {
 				return;
 			}
 
-			if (obj.varName && !isEmpty(obj.varName)) {
-				return `printf("${typeSymbol}", ${obj.varName});\n`;
-			}
-			else {
-				return `printf("${typeSymbol}",${parsedValue});\n`;
-			}
+			return `printf("${typeSymbol}",${obj.varName && !isEmpty(obj.varName) ? obj.varName : parsedValue});\n`;
 		},
 
 		var : function (fullValue) {
@@ -67,9 +62,9 @@ let DICTIONARY = {
 						}
 						else {
 							global.vars.push({
-								name : varName,
 								type : type,
-								value : varValue
+								value : varValue,
+								varName : varName
 							});
 
 							if (Type.convert(varValue) === "string") {

@@ -6,14 +6,14 @@ let splitValue = function (fullValue, types) {
 		let value = fullValue.replace(new RegExp("\\("+type+"\\)", "g"), ""); // 100
 
 		if (types.indexOf(type) !== -1) {
-			if (!isEmpty(type)) {
+			if (!isEmpty(value)) {
 				return {
 					type : type,
 					val : value
 				};
 			}
 			else {
-				console.error("Type cant be empty!");
+				console.error("Value cant be empty!");
 				return;
 			}
 		}
@@ -24,11 +24,11 @@ let splitValue = function (fullValue, types) {
 	}
 	else {
 		for (let i = 0; i < global.vars.length; i++) {
-			if (global.vars[i].name === fullValue) {
+			if (global.vars[i].varName === fullValue) {
 				return {
 					type : global.vars[i].type,
 					val : global.vars[i].value,
-					varName : global.vars[i].name
+					varName : global.vars[i].varName
 				};
 			}
 		}
