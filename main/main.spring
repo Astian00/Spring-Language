@@ -1,0 +1,4 @@
+var : (int) old = 17;
+
+print : (string) "Variable old created!";
+print : old;
